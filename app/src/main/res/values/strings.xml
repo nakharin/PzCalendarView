@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PzCalendarView</string>
+    <string name="str_clear">Clear</string>
+    <string name="str_check_in">Check in</string>
+</resources>
