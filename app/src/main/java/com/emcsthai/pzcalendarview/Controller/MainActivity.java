@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
         // findViewById Here
 
         pzCalendarView = (PzCalendarView) findViewById(R.id.pz_calendar_view);
-        pzCalendarView.updateCalendar();
+//        pzCalendarView.updateCalendar();
     }
 }
