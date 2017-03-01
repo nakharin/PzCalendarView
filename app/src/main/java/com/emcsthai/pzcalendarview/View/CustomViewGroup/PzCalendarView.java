@@ -2,18 +2,16 @@ package com.emcsthai.pzcalendarview.View.CustomViewGroup;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.emcsthai.pzcalendarview.R;
 import com.emcsthai.pzcalendarview.View.CustomViewGroup.Template.BaseCustomViewGroup;
-import com.emcsthai.pzcalendarview.View.CustomViewGroup.Template.State.BundleSavedState;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -58,25 +56,26 @@ public class PzCalendarView extends BaseCustomViewGroup {
     private void initInstances() {
         // findViewById here
         recyclerView = (RecyclerView) findViewById(R.id.pz_calendar_view_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Calendar> calendarArrayList = get12MonthOfYear();
+        List<Calendar> calendarList = get12MonthOfYear();
 
-        PzCalendarViewRecyclerViewListAdapter adapter = new PzCalendarViewRecyclerViewListAdapter(calendarArrayList);
+        PzCalendarViewRecyclerViewListAdapter adapter = new PzCalendarViewRecyclerViewListAdapter(calendarList);
         recyclerView.setAdapter(adapter);
     }
 
-    public ArrayList<Calendar> get12MonthOfYear() {
+    public List<Calendar> get12MonthOfYear() {
 
-        ArrayList<Calendar> calendarArrayList = new ArrayList<>();
+        List<Calendar> calendarList = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH, i);
-            calendarArrayList.add(calendar);
+            calendarList.add(calendar);
         }
 
-        return calendarArrayList;
+        return calendarList;
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -95,30 +94,5 @@ public class PzCalendarView extends BaseCustomViewGroup {
             a.recycle();
         }
         */
-    }
-
-    /*******************************************************************
-     * **************** Save & Restore InstanceState ********************
-     *******************************************************************/
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-
-        BundleSavedState savedState = new BundleSavedState(superState);
-        // Save Instance State(s) here to the 'savedState.getBundle()'
-        // for example,
-        // savedState.getBundle().putString("key", value);
-
-        return savedState;
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        BundleSavedState ss = (BundleSavedState) state;
-        super.onRestoreInstanceState(ss.getSuperState());
-
-        Bundle bundle = ss.getBundle();
-        // Restore State from bundle here
     }
 }

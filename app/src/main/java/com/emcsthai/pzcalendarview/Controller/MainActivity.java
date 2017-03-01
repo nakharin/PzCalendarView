@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PzCalendarView pzCalendarView;
 
+//    private DayPickerView dayPickerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,5 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         pzCalendarView = (PzCalendarView) findViewById(R.id.pz_calendar_view);
 //        pzCalendarView.updateCalendar();
+
+//        dayPickerView = (DayPickerView) findViewById(R.id.day_picker_view);
     }
 }

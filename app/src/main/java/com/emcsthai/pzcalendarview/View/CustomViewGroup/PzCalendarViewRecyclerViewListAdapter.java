@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -39,15 +40,14 @@ public class PzCalendarViewRecyclerViewListAdapter extends RecyclerView.Adapter<
 
     // how many days to show, defaults to six weeks, 42 days
     private static final int DAYS_COUNT = 42;
-    private static final int MAX_MONTH_ROW = 12;
     private static final int MAX_DAY_COLUMN = 7;
 
     private Context mContext;
 
-    private ArrayList<Calendar> calendarArrayList;
+    private List<Calendar> calendarList;
 
-    public PzCalendarViewRecyclerViewListAdapter(ArrayList<Calendar> calendarArrayList) {
-        this.calendarArrayList = calendarArrayList;
+    public PzCalendarViewRecyclerViewListAdapter(List<Calendar> calendarList) {
+        this.calendarList = calendarList;
     }
 
     @Override
@@ -75,11 +75,14 @@ public class PzCalendarViewRecyclerViewListAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return MAX_MONTH_ROW;
+        if (calendarList == null) {
+            return 0;
+        }
+        return calendarList.size();
     }
 
     public Calendar getItem(int position) {
-        return calendarArrayList.get(position);
+        return calendarList.get(position);
     }
 
     private void updateTitleCalendar(RecyclerViewHolder holder, Calendar calendar) {
@@ -105,7 +108,9 @@ public class PzCalendarViewRecyclerViewListAdapter extends RecyclerView.Adapter<
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        holder.rcvGridMonth.setLayoutManager(new GridLayoutManager(mContext, MAX_DAY_COLUMN));
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext, MAX_DAY_COLUMN);
+        holder.rcvGridMonth.setHasFixedSize(true);
+        holder.rcvGridMonth.setLayoutManager(layoutManager);
 
         PzCalendarViewRecyclerViewGridAdapter adapter = new PzCalendarViewRecyclerViewGridAdapter(arrayListDate, eventDays);
         holder.rcvGridMonth.setAdapter(adapter);
