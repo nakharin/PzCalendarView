@@ -33,4 +33,5 @@ dependencies {
     compile "com.android.support:design:${supportLibraryVersion}"
 
     compile 'com.github.traex.calendarlistview:library:1.2.3'
+    compile 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.0.4'
 }
